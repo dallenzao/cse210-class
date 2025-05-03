@@ -1,5 +1,6 @@
 using System;
-
+// Dallen Harmon
+// CSE210
 public class Entry
 {
     // Properties

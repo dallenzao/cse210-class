@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
-
+// Dallen Harmon
+// CSE210
 public class Journal
 {
     // Properties

@@ -1,10 +1,11 @@
 using System;
-
+// Dallen Harmon
+// CSE210
 class Program
 {
     static void Main(string[] args)
     {
-        Journal journal = new Journal();
+        Journal journal = new Journal(); 
         PromptGenerator promptGenerator = new PromptGenerator();
         bool running = true;
 
