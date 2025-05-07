@@ -30,6 +30,7 @@ class Program
     }
 
     static Fraction MakeAFraction(){
+        // This is mostly so we can test the Set methods
         Console.Write("Numerator? :");
         string strtop = Console.ReadLine();
         Console.Write("Denominator? :");
