@@ -19,14 +19,14 @@ class Program
     static void Menu(){
         bool running = true;
         Console.Clear();
-        ImportFromFile();
+        ImportFromFile(); //Imports references from file, if that file was there.
         Console.WriteLine("-- Welcome to Scripture Mastery Program -- \n");
         while(running){
             Console.WriteLine("What would you like to do?: \n");
             Console.WriteLine("1. Add a New Reference\n");
             Console.WriteLine("2. View a Reference to Practice!\n");
             Console.WriteLine("3. View a Random number of hidden words in a Reference\n");
-            Console.WriteLine("6. Exit Program and Save References to File\n");
+            Console.WriteLine("4. Exit Program and Save References to File\n");
             Console.Write("Please select an Option: \n");
             string choice = Console.ReadLine();
 
@@ -42,19 +42,13 @@ class Program
                     HideReference();
                     break;
                 case "4":
-                    ExportToFile();
-                    break;
-                case "5":
-                    ImportFromFile();
-                    break;
-                case "6":
                     running = false;
                     break;
             }
             
             Console.Clear();
         }
-        ExportToFile();
+        ExportToFile(); //Exports the file as the program shuts down
     }
 
     //Adds a reference to the main list of references stored in memory
