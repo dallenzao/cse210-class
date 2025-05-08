@@ -1,6 +1,9 @@
 using System.Data;
 using System.IO.Compression;
 
+//Dallen Harmon
+//CSE210
+
 public class Reference{
     private List<Scripture> _verses = new List<Scripture>();
     private string _book;
@@ -61,6 +64,7 @@ public class Reference{
         } 
     }
 
+    //Writes in the console the display text of the reference
     public void GetDisplayText(){
         string toReturn = "";
         GetReferenceName();
@@ -71,12 +75,19 @@ public class Reference{
         Console.WriteLine(toReturn);
     }
 
-    public void RandomizeHiddenWords(int numWords){ //Randomizes the number of hidden words in the verses. 
+    //Randomizes the number of hidden words in the verses. 
+    public bool RandomizeHiddenWords(int numWords){ 
+        bool fullyHidden = true;
         foreach (Scripture verse in _verses){
             verse.HideRandomWords(numWords);
+            if(verse.IsCompletelyHidden() == false){
+                fullyHidden = false;
+            }
         }
+        return fullyHidden;
     }
 
+    //Resets all the hidden words in a reference
     public void ResetHiddenWords(){
         foreach (Scripture verse in _verses){
             verse.ResetHiddenWords();

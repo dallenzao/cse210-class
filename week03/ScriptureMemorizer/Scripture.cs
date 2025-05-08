@@ -1,6 +1,9 @@
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 
+//Dallen Harmon
+//CSE210
+
 public class Scripture{
     private List<Word> _content = new List<Word>();
     private int _verse;
@@ -35,6 +38,7 @@ public class Scripture{
         }
     }
 
+    //Returns the text of the scripture
     public string GetDisplayText(){
         string verse = "";
         foreach (Word word in _content){
@@ -43,6 +47,7 @@ public class Scripture{
         return verse;
     }
 
+    //Resets the hidden words in a scripture
     public void ResetHiddenWords(){
         for(int i = 0; i < _content.Count; i++){
                 _content[i].setHidden(false);
@@ -78,6 +83,7 @@ public class Scripture{
         }
     }
 
+    //Sends true or false if it is completely hidden
     public bool IsCompletelyHidden(){
         foreach (Word word in _content){
             // if one word is not hidden, it return false

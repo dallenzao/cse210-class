@@ -1,5 +1,8 @@
 using System.Runtime.InteropServices;
 
+//Dallen Harmon
+//CSE210
+
 public class Word{
     private bool _isHidden;
     private string _word;
@@ -28,6 +31,7 @@ public class Word{
         _isHidden = hiddenStatus;
     }
 
+    //Returns the word, unless its hidden. Then return dashes instead
     public string giveWord(){
         if (_isHidden){
             // If the string is hidden, return dashes of that strings length
@@ -36,10 +40,13 @@ public class Word{
         }
         return _word;
     }
+
+    //Sets the hidden status
     public void setHidden(bool status){
         _isHidden = status;
     }
 
+    //Returns the hidden status
     public bool getStatus(){
         return _isHidden;
     }

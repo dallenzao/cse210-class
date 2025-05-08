@@ -1,7 +1,11 @@
 using System;
 using System.Collections;
+using System.Formats.Asn1;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+
+//Dallen Harmon
+//CSE210
 
 class Program
 {
@@ -15,16 +19,14 @@ class Program
     static void Menu(){
         bool running = true;
         Console.Clear();
+        ImportFromFile();
         Console.WriteLine("-- Welcome to Scripture Mastery Program -- \n");
         while(running){
             Console.WriteLine("What would you like to do?: \n");
             Console.WriteLine("1. Add a New Reference\n");
-            Console.WriteLine("2. View a Reference to Practice\n");
-            Console.WriteLine("3. Hide Words in a Reference\n");
-            Console.WriteLine("4. Reset Hidden Words in a Reference\n");
-            Console.WriteLine("5. Export References to a File\n");
-            Console.WriteLine("6. Load References From a File\n");
-            Console.WriteLine("7. Exit Program\n");
+            Console.WriteLine("2. View a Reference to Practice!\n");
+            Console.WriteLine("3. View a Random number of hidden words in a Reference\n");
+            Console.WriteLine("6. Exit Program and Save References to File\n");
             Console.Write("Please select an Option: \n");
             string choice = Console.ReadLine();
 
@@ -40,22 +42,22 @@ class Program
                     HideReference();
                     break;
                 case "4":
-                    ResetHidden();
-                    break;
-                case "5":
                     ExportToFile();
                     break;
-                case "6":
+                case "5":
                     ImportFromFile();
                     break;
-                case "7":
+                case "6":
                     running = false;
                     break;
             }
+            
             Console.Clear();
         }
+        ExportToFile();
     }
 
+    //Adds a reference to the main list of references stored in memory
     static void AddReference(){
         try{
             Console.Write("What Book is this reference in?\n");
@@ -91,6 +93,7 @@ class Program
             Console.WriteLine($"{i+1}: {_mastery[i].GetReferenceName()}");
         }
     }
+
     //This method shows the reference choses to the user, then waits for them to continue to then clear the screen.
     static void ViewReference(){
         Console.WriteLine("Which Reference would you like to view? \n");
@@ -98,10 +101,22 @@ class Program
         Console.Write("");
         string strchoice = Console.ReadLine();
         try{
-            Console.Clear();
+            int wordcount = 0;
             int choice = int.Parse(strchoice) - 1;
+            bool isFullyHidden = false;
+            ResetHidden(choice);
+            while (isFullyHidden == false){
+                Console.Clear();
+                _mastery[choice].GetDisplayText();
+                Console.Write("\n Press enter to remove some words.\n");
+                Console.ReadLine();
+                ResetHidden(choice);
+                wordcount++;
+                isFullyHidden = _mastery[choice].RandomizeHiddenWords(wordcount);
+            }
+            Console.Clear();
             _mastery[choice].GetDisplayText();
-            Console.Write("\n Press enter when done viewing. \n");
+            Console.Write("\n The word is now fully hidden! Press enter to go back.\n");
             Console.ReadLine();
         }
         catch{
@@ -109,26 +124,27 @@ class Program
             Console.ReadLine();
         }
     }
-
+    
+    //Exports the stored References in a json file, so it can be imported in later. 
     static void ExportToFile(){
         string json = JsonConvert.SerializeObject(_mastery);
         File.WriteAllText("masteryexport.json", json);   
-        Console.Write("File was exported to masteryexport.json. Press enter to continue\n");
+        Console.Write("File was exported to masteryexport.json. Press enter to exit\n");
         Console.ReadLine();
     }
 
+    //Imports the json file with the stored references, if it is there. 
     static void ImportFromFile(){
         try {
             string jsonIn = File.ReadAllText("masteryexport.json");
-            Console.Write("File was imported from masteryexport.json! Press enter to continue\n");
-            Console.ReadLine();
+            Console.Write("File was imported from masteryexport.json!\n");
             _mastery = JsonConvert.DeserializeObject<List<Reference>>(jsonIn);
         } catch (Exception ex) {
-            Console.WriteLine($"Error importing file: {ex.Message}. Press enter to continue.\n");
-            Console.ReadLine();
+            Console.WriteLine($"Error importing file: {ex.Message}.\n");
         }
     }
 
+    //Will hide a certain amount of words in a reference dependent on the users request
     static void HideReference(){
         Console.WriteLine("Which Reference would you like to hide words in?\n");
         ListAllReferences();
@@ -136,11 +152,15 @@ class Program
         string strchoice = Console.ReadLine();
         try{
             int choice = int.Parse(strchoice) - 1;
+            ResetHidden(choice);
             _mastery[choice].GetDisplayText();
             Console.Write("\n Above is the reference. How many words PER VERSE would you like to hide?\n");
             int numWords = int.Parse(Console.ReadLine());
+            ResetHidden(choice);
             _mastery[choice].RandomizeHiddenWords(numWords);
-            Console.Write($"Words in {_mastery[choice].GetReferenceName()} have been hidden. Press enter to continue\n");
+            Console.Clear();
+            _mastery[choice].GetDisplayText();
+            Console.Write($"\n\nPress enter to continue\n");
             Console.ReadLine();
         }
         catch{
@@ -149,21 +169,9 @@ class Program
         }
     }
 
-    static void ResetHidden(){
-        Console.WriteLine("Which Reference would you like to reset the hidden words in?\n");
-        ListAllReferences();
-        Console.Write("");
-        string strchoice = Console.ReadLine();
-        try{
-            int choice = int.Parse(strchoice) - 1;
-            _mastery[choice].ResetHiddenWords();
-            Console.Write($"Hidden words in {_mastery[choice].GetReferenceName()} have been reset. Press enter to continue\n");
-            Console.ReadLine();
-        }
-        catch{
-            Console.WriteLine("You must enter a valid number! Press enter to retry.\n");
-            Console.ReadLine();
-        }
+    //Resets all the hidden words in a reference
+    static void ResetHidden(int choice){
+        _mastery[choice].ResetHiddenWords();
     }
 
 }
