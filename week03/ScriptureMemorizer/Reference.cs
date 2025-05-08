@@ -47,6 +47,7 @@ public class Reference{
             }
         }
     }
+
     //Gets i used to return the book and chapter nums
     public string GetBook(){ return _book;}
     public int GetChapter(){ return _chapter;}
@@ -56,7 +57,7 @@ public class Reference{
             return $"{_book} {_chapter}:{_firstVerse}";
         }
         else{
-            return $"{_book} {_chapter}:{_firstVerse}-{_lastVerse}\n";
+            return $"{_book} {_chapter}:{_firstVerse}-{_lastVerse}";
         } 
     }
 
@@ -73,6 +74,12 @@ public class Reference{
     public void RandomizeHiddenWords(int numWords){ //Randomizes the number of hidden words in the verses. 
         foreach (Scripture verse in _verses){
             verse.HideRandomWords(numWords);
+        }
+    }
+
+    public void ResetHiddenWords(){
+        foreach (Scripture verse in _verses){
+            verse.ResetHiddenWords();
         }
     }
 }
