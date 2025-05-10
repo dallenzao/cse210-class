@@ -25,7 +25,7 @@ class Program
             Console.WriteLine("What would you like to do?: \n");
             Console.WriteLine("1. Add a New Reference\n");
             Console.WriteLine("2. View a Reference to Practice!\n");
-            Console.WriteLine("3. View a Random number of hidden words in a Reference\n");
+            Console.WriteLine("3. View a Specific number of hidden words in a Reference\n");
             Console.WriteLine("4. Exit Program and Save References to File\n");
             Console.Write("Please select an Option: \n");
             string choice = Console.ReadLine();
