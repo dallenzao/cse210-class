@@ -30,7 +30,7 @@ class Program
         List<Product> productList2 = new List<Product> { product4, product5, product6 };
         Order order2 = new Order(productList2, cust2);
 
-        Console.WriteLine("--- Packing Label for Customer 2 ---");
+        Console.WriteLine("\n--- Packing Label for Customer 2 ---");
         Console.WriteLine(order2.PackingLabel());
 
         Console.WriteLine("\n--- Shipping Label for Customer 2 ---");
