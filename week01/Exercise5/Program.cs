@@ -28,6 +28,6 @@ class Program
         return num*num;
     }
     static void DisplayResult(string name, int sqnum){
-        Console.WriteLine($"{name}, The square of your number is {sqnum}");
+        Console.WriteLine($"{name}, the square of your number is {sqnum}");
     }
 }
