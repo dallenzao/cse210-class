@@ -20,5 +20,17 @@ class Program
         Console.WriteLine(m1.GetHomeworkList());
         Console.WriteLine(m2.GetSummary());
         Console.WriteLine(m2.GetHomeworkList());
+
+        
+        for (int i = 0; i < 1500; i += 100)
+        {
+            
+Console.Write("+");
+
+Thread.Sleep(250);
+
+Console.Write("\b \b"); // Erase the + character
+Console.Write("-"); 
+        }
     }
 }

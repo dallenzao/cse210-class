@@ -1,3 +1,5 @@
+//Dallen Harmon
+//CSE210
 public class BreathingActivity : Activity
 {
 
@@ -8,23 +10,23 @@ public class BreathingActivity : Activity
 
     public void Run()
     {
-        Console.Clear();
         DisplayStartingMessage();
+
         int seconds = 0;
-        while (seconds < _duration)
+        while (seconds < _duration) //For the specified duration, do the activity
         {
             Console.Clear();
-            Console.Write("Breathe in");
-            for (int i = 0; i < 10; i++)
+            Console.Write("Breathe in  ");
+            for (int i = 0; i < 4; i++)
             {
-                if (seconds >= _duration) { break; } //If the specified duration passes at any point, itll break the loops
-                Console.Write(".");
+                if (seconds >= _duration) { break; } //If the specified duration passes at any point, itll break the loop!
+                Console.Write("."); // Every second add a dot.
                 Thread.Sleep(1000);
                 seconds++;
             }
             Console.WriteLine(" ");
             if (seconds >= _duration) { break; }
-            Console.Write("Breathe out");
+            Console.Write("Breathe out ");
 
             for (int i = 0; i < 10; i++)
             {
@@ -34,6 +36,7 @@ public class BreathingActivity : Activity
                 seconds++;
             }
         }
+
         Console.Clear();
         DisplayEndingMessage();
     }

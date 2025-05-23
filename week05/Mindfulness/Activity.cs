@@ -36,7 +36,6 @@ public class Activity //Base Activity Class, which the others inherit.
 
     public void DisplayEndingMessage()// Words t display at the end of the activity
     {
-        Console.Clear();
         Console.Write($"Great job! ");
         ShowSpinner(5); // Give the user a few second break
 
@@ -77,12 +76,6 @@ public class Activity //Base Activity Class, which the others inherit.
             Console.Write(new string('\b', numStr.Length)); // This will remove the entire number if its more than 1 digit long (100 itll delete 3 times for example)
 
         }
-    }
-    public void GetRandomInList(List<string> strings) //Prints a random item from a list
-    {
-        Random num = new Random();
-        int randomnum = num.Next(0, strings.Count); //Gets a random spot in the list based on its length
-        Console.WriteLine(strings[randomnum]); //Prints whatever string is in that spot
     }
 
 }

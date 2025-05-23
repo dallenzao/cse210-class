@@ -1,3 +1,5 @@
+//Dallen Harmon
+//CSE210
 public class ReflectingActivity : Activity
 {
     private List<string> _prompts = new List<string>();
@@ -28,10 +30,10 @@ public class ReflectingActivity : Activity
         DisplayStartingMessage();
         int seconds = 0;
         Console.Clear();
-        GetRandomInList(_prompts);
+        GetRandomInList(_prompts); //Prints a random prompt
         Console.WriteLine("");
         Console.Write("Think about this prompt... ");
-        ShowCountdown(20);
+        ShowCountdown(20); // Waits 20 seconds
         Console.WriteLine("");
 
         while (seconds < _duration)
@@ -44,6 +46,14 @@ public class ReflectingActivity : Activity
             seconds++; // Add a second to the counter
         }
 
+        Console.Clear();
         DisplayEndingMessage();
+    }
+
+    public void GetRandomInList(List<string> strings) //Prints a random item from a list
+    {
+        Random num = new Random();
+        int randomnum = num.Next(0, strings.Count); //Gets a random spot in the list based on its length
+        Console.WriteLine(strings[randomnum]); //Prints whatever string is in that spot
     }
 }

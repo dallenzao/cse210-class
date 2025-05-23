@@ -1,13 +1,21 @@
-using System;
+//Dallen Harmon
+//CSE210
+
+/*Extra things added to base functionality:
+In activity class, there is error checking to see if the user actually entered a number for the duration
+If they dont enter a number, or its not valid, itll tell the user that they entered the wrong thing and use a default value.
+
+Other than that I tried to follow the instructions for the base line.
+*/
 
 class Program
 {
     static void Main(string[] args)
     {
-        bool running = true;
+        bool running = true;//Keep the menu going unless the user quits
         while (running)
         {
-            Console.Clear();
+            Console.Clear(); //Clears and gives the user a list of things to do.
             Console.WriteLine("Welcome to the Mindfullness Program. Please choose from the following:");
             Console.WriteLine("1 - Breathing Activity");
             Console.WriteLine("2 - Reflecting Activity");
@@ -34,6 +42,6 @@ class Program
                     break;
             }
         }
-        Console.WriteLine("Thanks for being well with us.");
+        Console.WriteLine("Thanks for being well with us."); //End of program.
     }
 }
