@@ -7,10 +7,10 @@ public class ChecklistGoal : Goal
     public ChecklistGoal(string name, string desc, int points, int target, int bonus) : base(name, desc, points)
     {
         _target = target;
-        _bonus = bonus
+        _bonus = bonus;
     }
 
-    public override bool IsComplete()''
+    public override bool IsComplete()
     {
         if (_amountCompleted < _target)
         {
@@ -19,7 +19,7 @@ public class ChecklistGoal : Goal
         return true;
     }
 
-    public override int RecordEvent();
+    public override int RecordEvent()
     {
         //This is an Checklist Goal. It is. Add one to the counter, then return the points
         _amountCompleted++;

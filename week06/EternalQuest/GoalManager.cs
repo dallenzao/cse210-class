@@ -19,7 +19,7 @@ public class GoalManager
         bool validInput = false; // This is for error checking, if the user enters an incorrect number. 
         Console.WriteLine("Enter a number (1 = Simple goal, 2 = Eternal goal, 3 = Checklist goal):");
         string a = Console.ReadLine();
-        
+
         while (!validInput)
         {
             switch (a)
@@ -61,7 +61,7 @@ public class GoalManager
             case "3":
                 int target = StringtoIntErrorCheck("What is your target for how many times to complete the goal?");
                 int bonus = StringtoIntErrorCheck("When you reach your target, how many bonus points should you get?");
-                ChecklistGoal cg = new ChecklistGoal(name, desc, target, bonus);
+                ChecklistGoal cg = new ChecklistGoal(name, desc, points, target, bonus);
                 break;
         }
     }
@@ -70,13 +70,14 @@ public class GoalManager
     //The Create goal needs to verify if a strring can be converted to a int many times. This function cleans up the code. 
     {
         bool validInput = false;
+        int num = 0;
         while (!validInput)
         {
             Console.WriteLine(text);
             string numString = Console.ReadLine();
             try
             {
-                int num = int.TryParse(numString);
+                int.TryParse(numString, out num);
                 if (num <= 0)
                 {
                     Console.WriteLine("Incorrect Response. You need to enter a whole number above 0");
