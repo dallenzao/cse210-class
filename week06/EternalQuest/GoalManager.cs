@@ -17,12 +17,11 @@ public class GoalManager
         Console.WriteLine("3) Checklist Goal - Do this goal a certain number of times");
 
         bool validInput = false; // This is for error checking, if the user enters an incorrect number. 
-
+        Console.WriteLine("Enter a number (1 = Simple goal, 2 = Eternal goal, 3 = Checklist goal):");
+        string a = Console.ReadLine();
+        
         while (!validInput)
         {
-            Console.WriteLine("Enter a number (1 = Simple goal, 2 = Eternal goal, 3 = Checklist goal):");
-            string a = Console.ReadLine();
-
             switch (a)
             {
                 case "1":
