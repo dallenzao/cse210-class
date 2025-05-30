@@ -1,7 +1,7 @@
 public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
-    private int _score;
+    private int _score = 0;
 
     public GoalManager()
     {
@@ -50,18 +50,20 @@ public class GoalManager
         string desc = Console.ReadLine();
 
         int points = StringtoIntErrorCheck("How many points should this goal be worth every time you complete it?");
-        
+
         switch (a)
         {
             case "1": //Simple Goal
-                SimpleGoal g = new SimpleGoal(name, desc, points);
+                SimpleGoal sg = new SimpleGoal(name, desc, points);
                 break;
             case "2":
-                EternalGoal g = new EternalGoal(name, desc, points);
+                EternalGoal eg = new EternalGoal(name, desc, points);
                 break;
             case "3":
                 int target = StringtoIntErrorCheck("What is your target for how many times to complete the goal?");
                 int bonus = StringtoIntErrorCheck("When you reach your target, how many bonus points should you get?");
+                ChecklistGoal cg = new ChecklistGoal(name, desc, target, bonus);
+                break;
         }
     }
 
@@ -90,6 +92,6 @@ public class GoalManager
                 Console.WriteLine("Incorrect Response. You need to enter a whole number above 0");
             }
         }
-        return int;
+        return num;
     }
 }
