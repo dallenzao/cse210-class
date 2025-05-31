@@ -1,13 +1,18 @@
 public class EternalGoal : Goal
 {
     private int _count; // How many times the Eternal Goal was completed
+    public int Count // For Serialization
+    {
+        get => _count;
+        set => _count = value;
+    }
 
     public EternalGoal(string name, string desc, int points) : base(name, desc, points)
     {
         //Constructor is identical to the base Goal class
     }
 
-    public override bool IsComplete()
+    public override bool IsCompleted()
     {
         return false;
     }

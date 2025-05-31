@@ -1,13 +1,19 @@
 public class SimpleGoal : Goal
 {
     private bool _isComplete; // Simple goals can be completed. 
+        
+    public bool IsComplete // For Serialization
+    {
+        get => _isComplete;
+        set => _isComplete = value;
+    }
 
     public SimpleGoal(string name, string desc, int points) : base(name, desc, points)
     {
-        //Constructor is identical to the base Goal class
+        _isComplete = false;
     }
 
-    public override bool IsComplete()
+    public override bool IsCompleted()
     {
         return _isComplete;
     }
@@ -21,7 +27,12 @@ public class SimpleGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        return $"Goal: {_name}\nDescription: {_description}\nType: Simple\nCompleted:{_isComplete}";
+        string comp = " ";
+        if (IsCompleted())
+        {
+            comp = "X";
+        }
+        return $"Goal: {_name}\nDescription: {_description}\nType: Simple\nCompleted:[{comp}]";
     }
 
     

@@ -2,6 +2,17 @@ public class GoalManager
 {
     private List<Goal> _goals = new List<Goal>();
     private int _score = 0;
+    public List<Goal> Goals //Serialzation variables
+    {
+        get => _goals;
+        set => _goals = value;
+    }
+
+    public int Score
+    {
+        get => _score;
+        set => _score = value;
+    }
 
     public GoalManager()
     {
@@ -17,11 +28,12 @@ public class GoalManager
         Console.WriteLine("3) Checklist Goal - Do this goal a certain number of times");
 
         bool validInput = false; // This is for error checking, if the user enters an incorrect number. 
-        Console.WriteLine("Enter a number (1 = Simple goal, 2 = Eternal goal, 3 = Checklist goal):");
-        string a = Console.ReadLine();
-
+        string a = "";
+        
         while (!validInput)
         {
+            Console.WriteLine("Enter a number (1 = Simple goal, 2 = Eternal goal, 3 = Checklist goal):");
+            a = Console.ReadLine();
             switch (a)
             {
                 case "1":
@@ -54,14 +66,17 @@ public class GoalManager
         {
             case "1": //Simple Goal
                 SimpleGoal sg = new SimpleGoal(name, desc, points);
+                _goals.Add(sg);
                 break;
             case "2":
                 EternalGoal eg = new EternalGoal(name, desc, points);
+                _goals.Add(eg);
                 break;
             case "3":
                 int target = StringtoIntErrorCheck("What is your target for how many times to complete the goal?");
                 int bonus = StringtoIntErrorCheck("When you reach your target, how many bonus points should you get?");
                 ChecklistGoal cg = new ChecklistGoal(name, desc, points, target, bonus);
+                _goals.Add(cg);
                 break;
         }
     }
@@ -93,5 +108,53 @@ public class GoalManager
             }
         }
         return num;
+    }
+
+    public void ListGoalDetails()
+    {
+        foreach (Goal g in _goals)
+        {
+            Console.WriteLine("-------");
+            Console.WriteLine(g.GetStringRepresentation());
+        }
+        Console.WriteLine("-------");
+    }
+
+    public void RecordEvent()
+    {
+        int i = 1;
+        foreach (Goal g in _goals)
+        {
+            Console.WriteLine($"{i}) {g.GetStringDetails()}");
+            i++;
+        }
+        Console.WriteLine("-------");
+        bool validInput = false;
+        while (!validInput)
+        {
+            int num = StringtoIntErrorCheck("Which goal would you like to record an event in? Enter number:");
+            try
+            {
+                _score += _goals[num - 1].RecordEvent();
+                if (_goals[num - 1].IsCompleted())
+                {
+                    Console.WriteLine("Your goal is completed!");
+                }
+                Console.WriteLine($"Event Recorded! You now have {_score} points.");
+                validInput = true;
+            }
+            catch
+            {
+                Console.WriteLine($"You must enter a valid number!");
+            }
+
+        }
+
+
+    }
+
+    public void ShowPoints()
+    {
+        Console.WriteLine($"You currently have {_score} points!");
     }
 }
